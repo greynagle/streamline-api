@@ -80,3 +80,5 @@
 {"message":"Test id 7 created.","level":"info"}
 {"message":"assemblies is not defined","level":"error"}
 {"message":"Test id 8 created.","level":"info"}
+{"message":"Test id 3 created.","level":"info"}
+{"message":"insert into \"jointestsassemblies\" (\"assemblyid\", \"cycletime\", \"testid\") values ($1, $2, $3), ($4, $5, $6) returning * - insert or update on table \"jointestsassemblies\" violates foreign key constraint \"jointestsassemblies_assemblyid_fkey\"","level":"error"}
