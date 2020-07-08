@@ -29,7 +29,7 @@ const StreamlineService = {
     },
     getAssemblyContents(knex, id) {
         return knex.raw(
-            `select j.partid as partId, p.description, p.machine, p.complexity from joinpartsassemblies j join parts p on p.id = j.id where j.assemblyid = ${id}`
+            `select j.partid as partId, p.description, p.machine, p.complexity from joinpartsassemblies j join parts p on p.id = j.partid where j.assemblyid = ${id}`
         );
     },
     getMachines(knex, id) {
@@ -61,12 +61,12 @@ const StreamlineService = {
     },
     getTestAsmContents(knex, id) {
         return knex.raw(
-            `select a.description, jta.cycletime from jointestsassemblies jta join assemblies a on jta.assemblyid = a.id where jta.testid = ${id}`
+            `select a.id, a.description, jta.cycletime from jointestsassemblies jta join assemblies a on jta.assemblyid = a.id where jta.testid = ${id}`
         );
     },
     getTestMachContents(knex, id) {
         return knex.raw(
-            `select m.name, jtm.utilizationtime from jointestsmachines jtm join machines m on jtm.machineid = m.id where jtm.testid = ${id}`
+            `select m.id, m.name, jtm.utilizationtime from jointestsmachines jtm join machines m on jtm.machineid = m.id where jtm.testid = ${id}`
         );
     },
 
@@ -81,11 +81,11 @@ const StreamlineService = {
             });
     },
     addAssembly(knex, assembly, contents) {
-        console.log(assembly);
-        console.log(contents);
+        // console.log(assembly);
+        // console.log(contents);
         if (assembly === -1) {
             const { asmContents } = contents;
-            console.log(contents);
+            // console.log(contents);
             return knex
                 .insert(asmContents)
                 .into("joinpartsassemblies")
@@ -99,8 +99,8 @@ const StreamlineService = {
                 .into("assemblies")
                 .returning("*")
                 .then((rows) => {
-                    console.log(contents);
-                    console.log(rows[0].id);
+                    // console.log(contents);
+                    // console.log(rows[0].id);
                     const asmContents = contents.reduce((acc, cur) => {
                         return [
                             ...acc,
