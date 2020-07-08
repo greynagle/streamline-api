@@ -10,7 +10,7 @@ const simulation = (input) => {
     }
 
 	fullParts=fullParts.flat()
-	console.log(fullParts)
+	// console.log(fullParts)
 
     const impParts = fullParts.map((val) => {
         return {

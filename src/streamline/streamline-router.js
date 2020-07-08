@@ -195,19 +195,11 @@ streamlineRouter
     });
 
 streamlineRouter
-    .route("/tests/")
-    .get(({ app }, res, next) => {
-        StreamlineService.getTests(app.get("db"))
-            .then((data) => {
-                res.json(data);
-            })
-            .catch(next);
-    })
-
-    .post(bodyParser, ({ body, app }, res, next) => {
+	.route("/tests/")
+	.post(bodyParser, ({ body, app }, res, next) => {
         // verification
 
-        const { assemblies } = body;
+        const { contents } = body;
 
         const assemblyList = async (asm) => {
             return Promise.all(
@@ -233,7 +225,8 @@ streamlineRouter
         };
 
         const testSuite = async (id, utilization, cycle, rest) => {
-            return [rest,
+            return [
+                rest,
                 StreamlineService.addTestAssemblies(app.get("db"), id, cycle)
                     .then((data) => {
                         return data.rows;
@@ -251,10 +244,10 @@ streamlineRouter
             ];
         };
 
-        assemblyList(assemblies)
+        assemblyList(contents)
             .then((data) => {
                 let partList = data.reduce((acc, cur, ind) => {
-                    return { ...acc, [assemblies[ind]]: cur };
+                    return { ...acc, [contents[ind]]: cur };
                 }, {});
                 return combMach(partList);
             })
@@ -271,14 +264,41 @@ streamlineRouter
                         return testSuite(data.id, utilization, cycle, data);
                     })
                     .then((data) => {
-                        console.log(data)
-						logger.info(`Test id ${data[0].id} created.`);
+                        // console.log(data);
+                        logger.info(`Test id ${data[0].id} created.`);
                         res.status(201)
                             .location(`/tests/${data[0].id}`)
                             .json(serializeTest(data[0]));
                     });
             });
     });
+
+streamlineRouter
+    .route("/tests/:testId")
+    .get(({ params: { testId }, app }, res, next) => {
+        if (testId === "all") {
+            StreamlineService.getTests(app.get("db"))
+                .then((data) => {
+                    res.json(data);
+                })
+                .catch(next);
+        } else {
+            Promise.all([
+                StreamlineService.getTestAsmContents(app.get("db"), testId),
+                StreamlineService.getTestMachContents(app.get("db"), testId),
+            ])
+				.then(([asmRes, machRes]) => {
+					const testAsm = asmRes.rows
+					const testMach = machRes.rows
+					
+					res.json({testAsm, testMach})	
+				})
+				.catch(next)
+        }
+    })
+
+
+    
 
 // StreamlineService.addTest(app.get("db"), newTest)
 //     .then((test) => {
