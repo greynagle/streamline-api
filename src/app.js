@@ -1,7 +1,9 @@
 require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
-const cors = require("cors");
+const cors = require('cors');
+const {CLIENT_ORIGIN} = require('./config');
+
 const helmet = require("helmet");
 const { NODE_ENV } = require("./config");
 
@@ -13,7 +15,7 @@ app.use(morgan(morganOption));
 app.use(helmet());
 app.use(
     cors({
-        origin: CLIENT_ORIGIN,
+        origin: CLIENT_ORIGIN
     })
 );
 
