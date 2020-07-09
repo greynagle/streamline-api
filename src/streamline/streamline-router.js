@@ -40,6 +40,7 @@ const serializeCell = (cell) => ({
 const serializeTest = (test) => ({
     id: test.id,
     rundate: test.rundate,
+	batchtime: test.batchtime
 });
 
 streamlineRouter
