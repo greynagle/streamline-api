@@ -2,17 +2,17 @@ const simulation = (input) => {
     const components = input.compList;
     const machines = input.machList;
 
-    let fullParts = Object.values(components);
+    // grabs all parts and flattens them into one long list of parts to process
+	let fullParts = Object.values(components);
     for (let i = 0; i < fullParts.length; i++) {
         for (let j = 0; j < fullParts[i].length; j++) {
             fullParts[i][j]["asm"] = Object.keys(components)[i];
         }
     }
-
 	fullParts=fullParts.flat()
-	// console.log(fullParts)
 
-    const impParts = fullParts.map((val) => {
+    // modifies the long parts list into the format needed to process
+	const impParts = fullParts.map((val) => {
         return {
             id: val.partid,
             fmach: val.machine.split("")[0],
@@ -25,14 +25,16 @@ const simulation = (input) => {
         };
     });
 
-    const millQueue = impParts
+    // splits the parts list into two based on what the first required operation is for the part
+	const millQueue = impParts
         .filter((val) => val.fmach === "M")
         .sort((a, b) => b.fcomp - a.fcomp);
     const latheQueue = impParts
         .filter((val) => val.fmach === "T")
         .sort((a, b) => b.fcomp - a.fcomp);
 
-    const fullMach = machines.map((val) => {
+    // formats the list of the machines into the form required for the simulation
+	const fullMach = machines.map((val) => {
         return {
             id: val.id,
             type: val.type,
@@ -42,9 +44,11 @@ const simulation = (input) => {
         };
     });
 
-    let timer = 0;
+    // runs such that each 0.1 (imagined as minutes) the situation is re-evaluated
+	let timer = 0;
     let completed = [];
-    let claimFlag = Object.keys(components).reduce((acc, val) => {
+	// used to indicate a component has been earmarked for a particular assembly
+	let claimFlag = Object.keys(components).reduce((acc, val) => {
         return { ...acc, [val]: false };
     }, {});
     let asmTime = [];
@@ -104,8 +108,8 @@ const simulation = (input) => {
             let completedCompare = completed.filter(
                 (val) => val.asm == Object.keys(components)[i]
             );
-            // console.log("completed compare",completedCompare)
-            if (
+            // handling indications for when during the runtime an assembly came off the line
+			if (
                 completedCompare.length ===
                     Object.values(components)[i].length &&
                 !claimFlag[i]
@@ -122,9 +126,6 @@ const simulation = (input) => {
         return { id: val.id, utilize: val.utilize.toFixed(1) };
     });
     const cycle = asmTime;
-    // console.log(batch);
-    // console.log(utilization);
-    // console.log(cycle)
     return { batch, utilization, cycle };
 };
 

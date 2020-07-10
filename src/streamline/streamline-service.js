@@ -81,11 +81,8 @@ const StreamlineService = {
             });
     },
     addAssembly(knex, assembly, contents) {
-        // console.log(assembly);
-        // console.log(contents);
         if (assembly === -1) {
             const { asmContents } = contents;
-            // console.log(contents);
             return knex
                 .insert(asmContents)
                 .into("joinpartsassemblies")
@@ -99,8 +96,6 @@ const StreamlineService = {
                 .into("assemblies")
                 .returning("*")
                 .then((rows) => {
-                    // console.log(contents);
-                    // console.log(rows[0].id);
                     const asmContents = contents.reduce((acc, cur) => {
                         return [
                             ...acc,

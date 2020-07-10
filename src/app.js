@@ -5,8 +5,6 @@ const cors = require("cors");
 const {CLIENT_ORIGIN} = require("./config")
 const helmet = require("helmet");
 const { NODE_ENV } = require("./config");
-// const validateBearerToken = require("./validate-bearer-token");
-// const loginAuth = require("./login/login")
 const errorHandler = require("./error-handler");
 const streamlineRouter = require("./streamline/streamline-router");
 
@@ -23,10 +21,6 @@ app.use(
     })
 );
 app.use(helmet());
-
-// ONE OR THE OTHER
-// app.use(validateBearerToken);
-// app.use(loginAuth);
 
 app.use(streamlineRouter);
 
