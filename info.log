@@ -126,3 +126,44 @@
 {"message":"Assembly id 37 created.","level":"info"}
 {"message":"Machine id 6 created.","level":"info"}
 {"message":"Test id 12 created.","level":"info"}
+{"message":"Cannot read property 'from' of undefined","level":"error"}
+{"message":"Cannot read property 'from' of undefined","level":"error"}
+{"message":"select \"id\", \"description\", \"stock\", \"machine\", \"complexity\" from \"parts\" where \"isactive\" = $1 and \"id\" = $2 - invalid input syntax for type integer: \"nonsense\"","level":"error"}
+{"message":"select \"id\", \"description\", \"stock\", \"machine\", \"complexity\" from \"parts\" where \"isactive\" = $1 and \"id\" = $2 - invalid input syntax for type integer: \"nonsense\"","level":"error"}
+{"message":"select \"id\", \"description\", \"stock\", \"machine\", \"complexity\" from \"parts\" where \"isactive\" = $1 and \"id\" = $2 - invalid input syntax for type integer: \"nonsense\"","level":"error"}
+{"message":"select \"id\", \"description\", \"stock\", \"machine\", \"complexity\" from \"parts\" where \"isactive\" = $1 and \"id\" = $2 - invalid input syntax for type integer: \"nonsense\"","level":"error"}
+{"message":"select a.id, a.description, jta.cycletime from jointestsassemblies jta join assemblies a on jta.assemblyid = a.id where jta.testid = nope - column \"nope\" does not exist","level":"error"}
+{"message":"Part id 9 created.","level":"info"}
+{"message":"Part id 10 created.","level":"info"}
+{"message":"Part id 11 created.","level":"info"}
+{"message":"insert into \"machines\" (\"cellid\", \"isactive\", \"name\", \"type\") values (DEFAULT, $1, DEFAULT, DEFAULT) returning * - null value in column \"name\" violates not-null constraint","level":"error"}
+{"message":"insert into \"machines\" (\"cellid\", \"isactive\", \"name\", \"type\") values (DEFAULT, $1, DEFAULT, DEFAULT) returning * - null value in column \"name\" violates not-null constraint","level":"error"}
+{"message":"Assembly id 4 created.","level":"info"}
+{"message":"Machine id 8 created.","level":"info"}
+{"message":"Machine id 9 created.","level":"info"}
+{"message":"Machine id 1 created.","level":"info"}
+{"message":"Part id 1 created.","level":"info"}
+{"message":"Assembly id 1 created.","level":"info"}
+{"message":"Machine id 1 created.","level":"info"}
+{"message":"Part id 9 created.","level":"info"}
+{"message":"Assembly id 4 created.","level":"info"}
+{"message":"Machine id 6 created.","level":"info"}
+{"message":"Test id 3 created.","level":"info"}
+{"message":"Cannot read property 'rows' of undefined","level":"error"}
+{"message":"Part id 10 created.","level":"info"}
+{"message":"Assembly id 5 created.","level":"info"}
+{"message":"Machine id 7 created.","level":"info"}
+{"message":"Test id 4 created.","level":"info"}
+{"message":"Cannot read property 'rows' of undefined","level":"error"}
+{"message":"Part id 19 created.","level":"info"}
+{"message":"Assembly id 9 created.","level":"info"}
+{"message":"Machine id 13 created.","level":"info"}
+{"message":"Test id 7 created.","level":"info"}
+{"message":"Part id 9 created.","level":"info"}
+{"message":"Assembly id 4 created.","level":"info"}
+{"message":"Machine id 6 created.","level":"info"}
+{"message":"Test id 3 created.","level":"info"}
+{"message":"Part id 9 created.","level":"info"}
+{"message":"Assembly id 4 created.","level":"info"}
+{"message":"Machine id 6 created.","level":"info"}
+{"message":"Test id 3 created.","level":"info"}

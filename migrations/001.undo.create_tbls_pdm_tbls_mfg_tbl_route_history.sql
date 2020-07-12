@@ -6,5 +6,5 @@ machines,
 cells,
 tests,
 joinTestsAssemblies,
-joinTestsMachines,
+joinTestsMachines
 ;
