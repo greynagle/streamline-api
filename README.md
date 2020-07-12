@@ -5,7 +5,7 @@ Live link: https://streamline-dusky.vercel.app/
 Client repo: https://github.com/greynagle/streamline
 
 Structure:
-.
+```.
 ├── /main
 │   └── GET
 │       ├── /parts/all
@@ -22,6 +22,7 @@ Structure:
 │       ├── /assemblies/
 │       ├── /machines/
 │       └── /tests/
+```
 
 _______________________________________
 
